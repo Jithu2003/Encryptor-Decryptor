@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption/Decryption</title>
+    <style>
+    body {
+        background-color: #f0f8ff;
+       font-family: Arial, sans-serif;
+         display: flex;
+      flex-direction: column;
+       align-items: center;
+     justify-content: center;
+       height: 700px;
+        margin: 0;
+
+    }
+
+    h1, h2 {
+       color: #333;
+    }
+
+ .container {
+        text-align: center;
+     background-color: #c1deda;
+    padding: 20px;
+   border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      width: 80%;
+     padding: 10px;
+      margin: 10px 0;
+     border: 1px solid;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .encrypt-button {
+      background-color: #4caf50;
+      color: black;
+    }
+
+    .decrypt-button {
+      background-color: #2196f3;
+      color: black;
+    }
+
+    .result-field {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    </style>
+</head>
+<body>
+  
+<h1>Encryptor⌨/Decryptor🎞</h1>
+       <div class="container">
+       <h2>Encrypt</h2>
+<hr>
+   <input type="text" id="plain-text" placeholder="Enter a message to encrypt">
+ <button class="encrypt-button" onclick="encrypt()">Encrypt</button>
+     <br>
+   <input type="text" id="encrypted-text" class="result-field" readonly placeholder="Encrypted message">
+
+        <h2>Decrypt</h2>
+<hr>
+    <input type="text" id="cipher-text" placeholder="Enter a message to decrypt">
+ <button class="decrypt-button" onclick="decrypt()">Decrypt</button>
+     <br>
+       <input type="text" id="decrypted-text" class="result-field" readonly placeholder="Decrypted message">
+  </div>
+  <script>
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    const chars = " " + "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"+"0123456789"+"abcdefghijklmnopqrstuvwxyz"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let key = chars.split('');
+    shuffle(key);
+    function encrypt() {
+      const plainText = document.getElementById('plain-text').value;
+      let cipherText = "";
+
+      for (let letter of plainText) {
+          const index = chars.indexOf(letter);
+          cipherText += key[index];
+      }
+
+      document.getElementById('encrypted-text').value = cipherText;
+    }
+
+    function decrypt() {
+      const cipherText = document.getElementById('cipher-text').value;
+      let plainText = "";
+
+      for (let letter of cipherText) {
+          const index = key.indexOf(letter);
+          plainText += chars[index];
+      }
+
+      document.getElementById('decrypted-text').value = plainText;
+    }
+  </script>
+</body>
+</html>
